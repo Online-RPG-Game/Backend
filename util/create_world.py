@@ -4,8 +4,37 @@ from adventure.models import Player, Room
 
 Room.objects.all().delete()
 
+# two_d_array = []
+
+# rows = 10
+# cols = 20
+
+# for row in range(rows):
+#     temp_arr = []
+#     for col in range(cols):
+#         temp_arr.append(Room(title=f'{row} {col}', description=f'{row} {col}'))
+#     two_d_array.append(temp_arr)
+# print(two_d_array)
+
+# for row in range(rows):
+#     for col in range(cols):
+#         two_d_array[row][col].save()
+
+
+# for row in range(rows):
+#     for col in range(cols):
+#         if row < rows - 1:
+#             two_d_array[row][col].connectRooms(two_d_array[row + 1][col], 's')
+#         if row > 0:
+#             two_d_array[row][col].connectRooms(two_d_array[row - 1][col], 'n')
+#         if col < cols - 1:
+#             two_d_array[row][col].connectRooms(two_d_array[row][col + 1], 'e')
+#         if col > 0:
+#             two_d_array[row][col].connectRooms(two_d_array[row][col - 1], 'w')
+
+
 r_outside = Room(title="Outside Cave Entrance",
-               description="North of you, the cave mount beckons")
+                 description="North of you, the cave mount beckons")
 
 r_foyer = Room(title="Foyer", description="""Dim light filters in from the south. Dusty
 passages run north and east.""")
@@ -40,8 +69,7 @@ r_narrow.connectRooms(r_foyer, "w")
 r_narrow.connectRooms(r_treasure, "n")
 r_treasure.connectRooms(r_narrow, "s")
 
-players=Player.objects.all()
+players = Player.objects.all()
 for p in players:
-  p.currentRoom=r_outside.id
-  p.save()
-
+    p.currentRoom = r_outside.id
+    p.save()

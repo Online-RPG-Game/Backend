@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 
 import os
 from decouple import config
+import dj_database_url
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -23,10 +24,13 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = config('SECRET_KEY')
 
-# SECURITY WARNING: don't run with debug turned on in production!
+# # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG', cast=bool)
 
 ALLOWED_HOSTS = []
+
+# DATABASE = {}
+# DATABASE['default'] = dj_database_url.config(default=config('DATABASE_URL'))
 
 
 # Application definition
@@ -63,6 +67,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'adv_project.urls'
@@ -128,7 +133,7 @@ REST_FRAMEWORK = {
     ),
 }
 
-CORS_ORIGIN_ALLOW_ALL=True
+CORS_ORIGIN_ALLOW_ALL = True
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.1/topics/i18n/
@@ -148,6 +153,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 import django_heroku
 django_heroku.settings(locals())
