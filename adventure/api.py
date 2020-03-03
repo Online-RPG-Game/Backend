@@ -7,6 +7,8 @@ from django.contrib.auth.models import User
 from .models import *
 from rest_framework.decorators import api_view
 import json
+from .serializers import RoomSerializer
+from rest_framework import status
 
 # instantiate pusher
 # pusher = Pusher(app_id=config('PUSHER_APP_ID'), key=config('PUSHER_KEY'), secret=config('PUSHER_SECRET'), cluster=config('PUSHER_CLUSTER'))
@@ -16,6 +18,13 @@ import json
 @api_view(['GET'])
 def welcome(request):
     return JsonResponse({'message': 'Welcome to our MUD RPG game api'})
+
+
+@api_view(['GET'])
+def get_rooms(request):
+    rooms = Room.objects.all()
+    serializer = RoomSerializer(rooms, many=True)
+    return JsonResponse({'rooms': serializer.data}, safe=False)
 
 
 @csrf_exempt

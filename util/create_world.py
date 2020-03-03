@@ -14,7 +14,6 @@ for row in range(rows):
     for col in range(cols):
         temp_arr.append(Room(title=f'{row} {col}', description=f'{row} {col}'))
     two_d_array.append(temp_arr)
-print(two_d_array[0][0].title)
 
 
 for row in range(rows):
@@ -32,6 +31,7 @@ for row in range(rows):
             two_d_array[row][col].connectRooms(two_d_array[row][col + 1], 'e')
         if col > 0:
             two_d_array[row][col].connectRooms(two_d_array[row][col - 1], 'w')
+
 
 players = Player.objects.all()
 for p in players:
