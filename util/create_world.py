@@ -21,7 +21,7 @@ tiles = [
 
 rows = 10
 cols = 20
-counter = 1
+counter = 0
 
 for row in range(rows):
     temp_arr = []
